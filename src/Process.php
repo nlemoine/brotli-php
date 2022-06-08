@@ -11,7 +11,7 @@ class Process extends \Symfony\Component\Process\Process
      *
      * @return bool
      */
-    protected function isSigchildEnabled()
+    protected function isSigchildEnabled(): bool
     {
         if (null !== self::$sigchild) {
             return self::$sigchild;
