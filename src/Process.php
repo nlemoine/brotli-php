@@ -1,6 +1,6 @@
 <?php
 
-namespace HelloNico\Brotli;
+namespace n5s\Brotli;
 
 class Process extends \Symfony\Component\Process\Process
 {

@@ -1,5 +1,5 @@
 {
-    "name": "hellonico/brotli",
+    "name": "n5s/brotli",
     "type": "library",
     "description": "Add brotli compress/uncompress functions to PHP. Batteries included.",
     "keywords": [
@@ -9,20 +9,21 @@
     "authors": [
         {
             "name": "Nicolas Lemoine",
-            "email": "tech@niconico.fr"
+            "email": "nico@n5s.dev",
+            "homepage": "https://n5s.dev"
         }
     ],
     "require": {
-        "php": "^7.4 || ^8.0",
-        "loophp/phposinfo": "^1.7",
-        "symfony/process": "^5.0 || ^6.0"
+        "php": "^8.1",
+        "symfony/process": "^6.0 || ^7.0",
+        "n5s/local-bin-brotli": "^1.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "^8.0 || ^9.0"
+        "phpunit/phpunit": "^9.0"
     },
     "autoload": {
         "psr-4": {
-            "HelloNico\\Brotli\\": "src/"
+            "n5s\\Brotli\\": "src/"
         },
         "files": [
             "src/functions.php"

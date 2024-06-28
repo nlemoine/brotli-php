@@ -1,7 +1,8 @@
 <?php
+
 declare(strict_types=1);
 
-namespace HelloNico\Brotli\Exception;
+namespace n5s\Brotli\Exception;
 
 interface BrotliException extends \Throwable
 {
