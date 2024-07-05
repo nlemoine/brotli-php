@@ -1,4 +1,4 @@
-name: Split
+name: Release
 
 on:
   push:
