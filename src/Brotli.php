@@ -1,20 +1,21 @@
 <?php
+
 declare(strict_types=1);
 
 namespace n5s\Brotli;
 
-use Symfony\Component\Process\Exception\ExceptionInterface;
-use Symfony\Component\Process\Exception\ProcessFailedException;
 use n5s\Brotli\Exception\BrotliException;
 use n5s\Brotli\Exception\CorruptInputException;
 use n5s\Brotli\Exception\InvalidQualityException;
 use n5s\LocalBin\Binary\Brotli as BinaryBrotli;
+use Symfony\Component\Process\Exception\ExceptionInterface;
+use Symfony\Component\Process\Exception\ProcessFailedException;
 
 final class Brotli
 {
     /**
      * @param string $data The raw data to compress
-     * @param int $quality Compression level (0-11)
+     * @param int<0, 11> $quality Compression level (0-11)
      * @return string The compressed data
      * @throws BrotliException If quality is invalid
      * @throws ExceptionInterface In case something went wrong with process
@@ -39,6 +40,11 @@ final class Brotli
         return self::runBinary(['-d'], $data);
     }
 
+    /**
+     * @param array<int, string|int<0, 11>> $arguments
+     * @throws BrotliException
+     * @throws ExceptionInterface
+     */
     private static function runBinary(array $arguments, string $stdin): string
     {
         $brotli = BinaryBrotli::getPath();
@@ -48,7 +54,7 @@ final class Brotli
         try {
             $proc->mustRun();
         } catch (ProcessFailedException $exception) {
-            if (strpos($proc->getErrorOutput(), 'corrupt input') === 0) {
+            if (str_starts_with($proc->getErrorOutput(), 'corrupt input')) {
                 throw CorruptInputException::create($exception);
             }
 

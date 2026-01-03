@@ -2,14 +2,15 @@
 
 declare(strict_types=1);
 
-use PHPUnit\Framework\TestCase;
 use n5s\Brotli\Brotli;
+use n5s\Brotli\Exception\CorruptInputException;
+use n5s\Brotli\Exception\InvalidQualityException;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\TestCase;
 
 final class BrotliTest extends TestCase
 {
-    /**
-     * @dataProvider compressDataProvider
-     */
+    #[DataProvider('compressDataProvider')]
     public function testCompressAndUncompressWithAllQualities(int $quality, bool $useFunctions)
     {
         $data = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus.';
@@ -23,7 +24,7 @@ final class BrotliTest extends TestCase
         $this->assertSame($data, $uncompressed);
     }
 
-    public function compressDataProvider()
+    public static function compressDataProvider()
     {
         return [
             [0,     false],
@@ -55,7 +56,7 @@ final class BrotliTest extends TestCase
 
     public function testDecodeNonBrotliData()
     {
-        $this->expectException(\n5s\Brotli\Exception\CorruptInputException::class);
+        $this->expectException(CorruptInputException::class);
         $this->expectExceptionMessage('Input data is not valid Brotli.');
 
         Brotli::uncompress('this is not brotli');
@@ -66,19 +67,17 @@ final class BrotliTest extends TestCase
         $this->assertSame('', Brotli::uncompress(Brotli::compress('')));
     }
 
-    /**
-     * @dataProvider invalidQualityDataProvider
-     */
+    #[DataProvider('invalidQualityDataProvider')]
     public function testInvalidQuality(int $quality)
     {
-        $this->expectException(\n5s\Brotli\Exception\InvalidQualityException::class);
+        $this->expectException(InvalidQualityException::class);
         $this->expectExceptionMessageMatches('#^The quality value is invalid#');
 
-        $this->expectExceptionMessage('The quality value is invalid. Must be between 0 and 11, '.$quality.' given.');
+        $this->expectExceptionMessage('The quality value is invalid. Must be between 0 and 11, ' . $quality . ' given.');
         Brotli::compress('hello', $quality);
     }
 
-    public function invalidQualityDataProvider()
+    public static function invalidQualityDataProvider()
     {
         return [
             [-1],

@@ -14,13 +14,15 @@
         }
     ],
     "require": {
-        "php": "^8.1",
+        "php": "^8.2",
         "n5s/local-bin-brotli": "^1.1.2",
-        "symfony/process": "^6.0 || ^7.0"
+        "symfony/process": "^6.0 || ^7.0 || ^8.0"
     },
     "require-dev": {
         "ergebnis/composer-normalize": "^2.43",
-        "phpunit/phpunit": "^9.0"
+        "phpunit/phpunit": "^11.0 || ^12.0",
+        "rector/rector": "^2.3",
+        "symplify/easy-coding-standard": "^13.0"
     },
     "autoload": {
         "psr-4": {
@@ -37,7 +39,7 @@
     },
     "scripts": {
         "test": [
-            "vendor/bin/phpunit --testdox"
+            "vendor/bin/phpunit"
         ]
     }
 }

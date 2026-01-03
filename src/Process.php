@@ -1,26 +1,28 @@
 <?php
 
+declare(strict_types=1);
+
 namespace n5s\Brotli;
 
-class Process extends \Symfony\Component\Process\Process
+use Symfony\Component\Process\Process as SymfonyProcess;
+
+class Process extends SymfonyProcess
 {
-    private static $sigchild;
+    private static bool $sigchild;
 
     /**
      * Returns whether PHP has been compiled with the '--enable-sigchild' option or not.
-     *
-     * @return bool
      */
     protected function isSigchildEnabled(): bool
     {
-        if (null !== self::$sigchild) {
+        if (isset(self::$sigchild)) {
             return self::$sigchild;
         }
 
-        if (!\function_exists('phpinfo')) {
+        if (! \function_exists('phpinfo')) {
             return self::$sigchild = false;
         }
 
-        return self::$sigchild = false !== strpos(shell_exec('php -i'), '--enable-sigchild');
+        return self::$sigchild = str_contains((string) shell_exec('php -i'), '--enable-sigchild');
     }
 }
