@@ -1,4 +1,4 @@
-[![PHP unit tests](https://github.com/nlemoine/brotli-php/actions/workflows/tests.yml/badge.svg?branch=main)](https://github.com/nlemoine/brotli-php/actions/workflows/tests.yml?query=branch:2.x)
+[![Tests](https://img.shields.io/github/actions/workflow/status/nlemoine/brotli-php/qa.yml?branch=main&label=tests)](https://github.com/nlemoine/brotli-php/actions/workflows/qa.yml)
 ![Packagist Downloads](https://img.shields.io/packagist/dt/n5s/brotli)
 
 This library adds Brotli support to PHP. Batteries included.
