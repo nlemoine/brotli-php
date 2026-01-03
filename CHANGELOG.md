@@ -1,5 +1,16 @@
 # Changelog
 
+## [3.0.0](https://github.com/nlemoine/brotli-php/compare/2.0.0...3.0.0) (2026-01-03)
+
+
+### ⚠ BREAKING CHANGES
+
+* Update dependencies for PHP 8.2+ compatibility
+
+### Features
+
+* Update dependencies for PHP 8.2+ compatibility ([bbcefe7](https://github.com/nlemoine/brotli-php/commit/bbcefe7bf01971f88dbec9a5d84b1495a1c779bb))
+
 ## [2.0.0](https://github.com/nlemoine/brotli-php/compare/1.2.0...2.0.0) (2024-07-05)
 
 
